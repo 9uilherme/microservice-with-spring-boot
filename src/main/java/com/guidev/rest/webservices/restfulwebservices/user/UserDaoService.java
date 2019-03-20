@@ -5,6 +5,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -37,5 +38,18 @@ public class UserDaoService {
         }
         users.add(user);
         return user;
+    }
+
+    public User deleteById(Integer id){
+        Iterator<User> iterator = users.iterator();
+        while(iterator.hasNext()){
+            User user = iterator.next();
+            if(user.getId() == id){
+                iterator.remove();
+                return user;
+            }
+        }
+        return null;
+
     }
 }
