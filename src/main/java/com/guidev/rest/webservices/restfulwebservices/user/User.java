@@ -1,17 +1,23 @@
 package com.guidev.rest.webservices.restfulwebservices.user;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@ApiModel(description = "Info about User")
 public class User {
 
     private Integer id;
 
     @Size(min=2, message = "Name has to be bigger than 1 character")
+    @ApiModelProperty(notes="Name has to be bigger than 1 character")
     private String name;
 
     @Past
+    @ApiModelProperty(notes = "Birth Date has to be in the past")
     private Date birthDate;
 
     protected User(){}
