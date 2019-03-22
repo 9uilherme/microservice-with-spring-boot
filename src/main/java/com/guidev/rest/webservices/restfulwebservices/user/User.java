@@ -1,15 +1,21 @@
 package com.guidev.rest.webservices.restfulwebservices.user;
 
+import com.guidev.rest.webservices.restfulwebservices.post.Post;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
+@Entity
 @ApiModel(description = "Info about User")
 public class User {
 
+    @Id
+    @GeneratedValue
     private Integer id;
 
     @Size(min=2, message = "Name has to be bigger than 1 character")
@@ -19,6 +25,9 @@ public class User {
     @Past
     @ApiModelProperty(notes = "Birth Date has to be in the past")
     private Date birthDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     protected User(){}
 
@@ -51,6 +60,14 @@ public class User {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override

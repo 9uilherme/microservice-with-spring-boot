@@ -45,4 +45,9 @@ public class UserResource {
         if(user == null)
             throw  new UserNotFoundException("id-"+id);
     }
+
+    @GetMapping("users/{id}/posts")
+    public List retrievePosts(@PathVariable int id){
+        return service.findOne(id).getPosts();
+    }
 }
